@@ -1,0 +1,28 @@
+{
+  "name": "chessautoannotation",
+  "version": "1.0.0",
+  "description": "mock",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel ./app.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./out.js && rm -f tmp.js",
+    "debug": "babel ./app.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./out.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chess": "^0.2.8",
+    "react": "^16.1.0",
+    "react-chessdiagram": "^1.3.3",
+    "react-dom": "^16.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^14.5.0"
+  }
+}
