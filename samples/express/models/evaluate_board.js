@@ -76,8 +76,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
         // チェスエンジンの準備ができた通知が来たときの処理
         if (line === "uciok") 
         {
-            //this.send("position " + FEN_format_position);
-        	this.send("position fen " + "8/8/p2k1p2/1p1p3p/1P1P3p/P3NPP1/5K2/1b6 w - - 0 47"); // ポジションの設定
+        	this.send("position fen " + FEN_format_position); // ポジションの設定
             this.send("eval");                              // 局面評価開始
             this.send("d");                                 // 盤面をAA表示。関数に投入するため削除
             this.send("go ponder");                         // 候補手探索開始
