@@ -10,19 +10,21 @@
     <div id="root"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
     <script src="out.js"></script>
+    
     <div class="FEN_input">
-		<p>FEN:&nbsp;&nbsp;<input id="FEN" type="text" name="FEN" style="width: 30%"></p>
+		
 		<p><input type="button" name="FENsubmit" value="submit FEN" onClick="submitFEN();"></p>
-	<div>
+	<div> 
 		<form name="FENSubmitForm" action="fensubmit" method="POST">
 			<input type="hidden" name='FENtoAnalyze' value="">
 		</form>
   </body>
   
   <script>
+        var FENstring = document.getElementById("root").firstElementChild.lastElementChild.value;
+        console.log(FENstring);
 		function submitFEN(){
-			elem = document.getElementById("FEN");
-			document.forms.FENSubmitForm.FENtoAnalyze.value = elem.value;
+			document.forms.FENSubmitForm.FENtoAnalyze.value = FENstring;
 			var f = document.forms["FENSubmitForm"];
 			f.method = "POST";
 			f.submit(); 
