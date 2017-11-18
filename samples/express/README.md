@@ -2,11 +2,18 @@
 
 # CCA-deploy
 
+Chess Commentary Automatic
 
 
 ## Usage
 
+Install
 
+npm install
+npm run build
+npm start
+
+- http://127.0.0.1:3000/にアクセスすればトップページに飛びます。
 
 ## Developing
 

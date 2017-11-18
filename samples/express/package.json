@@ -2,13 +2,29 @@
   "name": "CCA-deploy",
   "version": "0.0.1",
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/out.js && rm -f tmp.js",
+    "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/out.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "ejs": "*",
     "express": "3.2.6",
-    "stockfish": "^8.0.0"
+    "stockfish": "^8.0.0",
+    "chess": "^0.2.8",
+    "react": "^15.6.2",
+    "react-chessdiagram": "^1.3.3",
+    "react-dom": "^15.6.2"
+  },
+  "devDependencies":{
+	"babel-cli": "^6.26.0",
+	"babel-core": "^6.26.0",
+	"babel-plugin-transform-react-jsx": "^6.24.1",
+	"babel-preset-env": "^1.6.1",
+	"babel-preset-react": "^6.24.1",
+	"babelify": "^8.0.0",
+	"browserify": "^14.5.0"
   }
 }
