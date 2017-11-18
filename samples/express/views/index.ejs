@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Welcome to Chess-Commentary-Automatic!</h1>
+    <p>By donta1024, ishihara1989, interimadd, & AyatsujiP</p>
+    
+    <div class="FEN_input">
+		<p>FEN:&nbsp;&nbsp;<input id="FEN" type="text" name="FEN" style="width: 30%"></p>
+		<p><input type="button" name="FENsubmit" value="submit FEN" onClick="submitFEN();"></p>
+	<div>
+		<form name="FENSubmitForm" action="fensubmit" method="POST">
+			<input type="hidden" name='FENtoAnalyze' value="">
+		</form>
+  </body>
+  
+  <script>
+		function submitFEN(){
+			elem = document.getElementById("FEN");
+			document.forms.FENSubmitForm.FENtoAnalyze.value = elem.value;
+			var f = document.forms["FENSubmitForm"];
+			f.method = "POST";
+			f.submit(); 
+		};
+　　</script>
+</html>

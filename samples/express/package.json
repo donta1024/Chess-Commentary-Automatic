@@ -1,0 +1,14 @@
+{
+  "name": "CCA-deploy",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "ejs": "*",
+    "express": "3.2.6",
+    "stockfish": "^8.0.0"
+  }
+}
