@@ -21,9 +21,9 @@
   </body>
   
   <script>
-        var FENstring = document.getElementById("root").firstElementChild.lastElementChild.value;
-        console.log(FENstring);
 		function submitFEN(){
+	        var FENstring = document.getElementById("root").firstElementChild.lastElementChild.value;
+	        console.log(FENstring);
 			document.forms.FENSubmitForm.FENtoAnalyze.value = FENstring;
 			var f = document.forms["FENSubmitForm"];
 			f.method = "POST";
