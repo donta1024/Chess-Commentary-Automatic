@@ -37,6 +37,8 @@ node_modules/
 jspm_packages/
 public/
 !public/js/.gitkeep
+!public/css/.gitkeep
+!public/img/.gitkeep
 
 # Typescript v1 declaration files
 typings/
