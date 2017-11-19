@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/out.js && rm -f tmp.js;",
-    "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/out.js"
+    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;",
+    "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
