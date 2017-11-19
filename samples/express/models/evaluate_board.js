@@ -15,40 +15,40 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
     	"calculated_line": "",
     	"total_evaluation_score": 0,
     	"material":{
-    		"white": 0, "black": 0,"total": 0
+    		"white": null, "black": null, "total": {"MG": 0, "EG": 0}
     	},
     	"imbalance":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": null, "black": null, "total": {"MG": 0, "EG": 0}    		
     	},
     	"pawn":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": null, "black": null, "total": {"MG": 0, "EG": 0}    		
     	},
     	"knight":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}   		
     	},   	
     	"bishop":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"rook":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"queen":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"mobility":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"king_safety":{
-    		"white": 0,"black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0},"black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"threats":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"passed_pawn":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     	"space":{
-    		"white": 0, "black": 0, "total": 0    		
+    		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     };
     
@@ -78,7 +78,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
         {
         	this.send("position fen " + FEN_format_position); // ポジションの設定
             this.send("eval");                              // 局面評価開始
-            this.send("d");                                 // 盤面をAA表示。関数に投入するため削除
+            //this.send("d");                                 // 盤面をAA表示。関数に投入するため削除
             this.send("go ponder");                         // 候補手探索開始
 
             var f = this;
@@ -86,7 +86,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
         }
         else if(line.indexOf("Total Evaluation:") > -1){
             match = line.match(/Total Evaluation:\s+(\S+)/);
-            if(match){ self.analysis_result["total_evaluation_score"] = match[1]; }
+            if(match){ self.analysis_result["total_evaluation_score"] = match[1] - 0; }
         }
         // 候補手探索が打ち切られると通知される最善手に対する処理
         else if (line.indexOf("bestmove") > -1) {
@@ -94,6 +94,55 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
             if (match) { self.analysis_result["best_move"] = match[1]; }
             self.is_finish_evaluation = true;
         }
+        //それぞれの評価値を受け取ってJSONに投入
+        else if (line.indexOf("       Material") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "material");}
+        }
+        else if (line.indexOf("      Imbalance") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "imbalance");}
+        }
+        else if (line.indexOf("          Pawns") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "pawn");}
+        }
+        else if (line.indexOf("        Knights") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "knight");}
+        }
+        else if (line.indexOf("         Bishop") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "bishop");}
+        }
+        else if (line.indexOf("          Rooks") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "rook");}
+        }
+        else if (line.indexOf("         Queens") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "queen");}
+        }
+        else if (line.indexOf("       Mobility") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "mobility");}
+        }
+        else if (line.indexOf("    King safety") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "king_safety");}
+        }
+        else if (line.indexOf("        Threats") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "threats");}
+        }
+        else if (line.indexOf("   Passed pawns") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "passed_pawn");}
+        }
+        else if (line.indexOf("          Space") > -1){
+        	match = line.match(/-?[0-9]+.[0-9]+/g);
+        	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "space");}
+        }        
     };
 
     this.executeCallbackfuncAfterEvaluationFinish = function(callback_func){
@@ -109,6 +158,22 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
 
 exports.EvaluateBoard = EvaluateBoard;
 exports.analysis_result = EvaluateBoard.analysis_result;
+
+function setEvaluation(match, resultJson, resultKey){
+	if (match.length == 2){
+		resultJson[resultKey]["total"]["MG"] = match[0] - 0;
+		resultJson[resultKey]["total"]["EG"] = match[1] - 0;
+	}
+	else if (match.length == 6){
+		resultJson[resultKey]["white"]["MG"] = match[0] - 0;
+		resultJson[resultKey]["white"]["EG"] = match[1] - 0;
+		resultJson[resultKey]["black"]["MG"] = match[2] - 0;
+		resultJson[resultKey]["black"]["EG"] = match[3] - 0;
+		resultJson[resultKey]["total"]["MG"] = match[4] - 0;
+		resultJson[resultKey]["total"]["EG"] = match[5] - 0;
+	}
+	return resultJson;
+}
 
 /*
 //局面評価クラスの使用方法のイメージ　
