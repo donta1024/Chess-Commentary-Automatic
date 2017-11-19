@@ -1,6 +1,8 @@
 
 /* requireでモジュール読み込み */
 var stockfish = require("stockfish");
+var saveToMongoDB = require("./save_to_mongodb.js");
+var tableName = "fen_analysis_result";
 
 /* FEN形式のポジションと解析時間を入力として、解析を行うクラス。
 　解析が終わるとis_finish_evaluationがtrueになり、解析結果がメンバー変数に格納される */
@@ -11,6 +13,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
     
     /*解析結果は、JSON形式のほうが直感的に理解でき、バグ修正も容易。*/
     this.analysis_result = {
+    	"fen_position":FEN_format_position,
     	"best_move": "",
     	"calculated_line": "",
     	"total_evaluation_score": 0,
@@ -148,6 +151,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
     this.executeCallbackfuncAfterEvaluationFinish = function(callback_func){
         if( this.is_finish_evaluation == true )
         {
+        	saveToMongoDB.insertIntoMongoDB(tableName,self.analysis_result);
             callback_func();
             return; 
         }
