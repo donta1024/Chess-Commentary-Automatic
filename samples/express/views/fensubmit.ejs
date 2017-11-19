@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel='stylesheet' href='/css/chessboard-0.3.0.min.css'>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script type="text/javascript" src="/js/chessboard-0.3.0.min.js"></script>
   <head>
     <title>FEN Submit</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
   </head>
   <body>
     <h3> submit succeeded!</h3>
-    <div id="root"></div>
-    <script src="static_out.js"></script>
-    
+	<div id="board" style="width: 400px"></div>
     <p>FEN String: <%=FEN %></p>
-    <p>Analyze Result: <%=analyzeResult %></p>
+    <p>Analyze Result: <%- analyzeResult %></p>
   </body>
   <script>
-  	var chess = new Chess(<%=FEN %>);
-  	
+  	var board = ChessBoard('board', '<%=FEN %>');
   </script>
 <html>
