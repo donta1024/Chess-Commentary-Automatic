@@ -1,20 +1,23 @@
 {
   "name": "chessautoannotation",
-  "version": "1.0.0",
-  "description": "mock",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel ./app.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./out.js && rm -f tmp.js",
-    "debug": "babel ./app.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./out.js"
-  },
-  "author": "",
+  "version": "0.0.1",
+  "private": true,
   "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;",
+    "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js"
+  },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "chess": "^0.2.8",
-    "react": "^16.1.0",
+    "ejs": "*",
+    "express": "3.2.6",
+    "react": "^15.6.2",
     "react-chessdiagram": "^1.3.3",
-    "react-dom": "^16.1.0"
+    "react-dom": "^15.6.2",
+    "stockfish": "^8.0.0",
+    "mongodb":"*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
