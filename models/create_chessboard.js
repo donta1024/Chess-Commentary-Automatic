@@ -26,6 +26,20 @@ class Board extends React.Component{
 			pgn: ""
 		});
 	}
+	handleChange(event) {
+	    // ネストされたオブジェクトのdataまでアクセスしておく
+	    var data = this.state.data;
+	    if (event.target.name == "fen"){
+	    	data.fen = document.getElementById("root").firstElementChild.lastElementChild.value;
+	    }
+	    
+        this.setState({
+            data: data
+        });
+	}
+	
+	handleSubmit() {
+	}
 	render() {
 		var self = this
 		function onMovePiece(piece, fromSquare, toSquare){
@@ -43,6 +57,7 @@ class Board extends React.Component{
 				console.log("invalid move!");
 			}
 		}
+		
     return (
 			<div>
 				<Chessdiagram
@@ -54,11 +69,18 @@ class Board extends React.Component{
 					onMovePiece={onMovePiece} />
 				<textarea cols="80" rows="4" readOnly={true} value={this.state.pgn}></textarea>
 				<br />
-				<input type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
+				<form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
+					<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
+	            	<button type="submit">送信</button>
+	            </form>
 			</div>
     );
   }
 }
+
+
+
+
 
 ReactDOM.render(
 	<Board chess={chess} flip={flip} squareSize={squareSize}
