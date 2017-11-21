@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;",
+    "build_form": "babel ./models/create_form.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/form.js && rm -f tmp.js;",
     "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js"
   },
   "dependencies": {
