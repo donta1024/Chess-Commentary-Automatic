@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Chessdiagram from 'react-chessdiagram';
+import { Button } from 'semantic-ui-react';
+import { Form } from 'semantic-ui-react';
+import { TextArea } from 'semantic-ui-react';
 
 var chess = new Chess();
 
@@ -67,12 +70,12 @@ class Board extends React.Component{
 				  lightSquareColor={this.props.lightSquareColor}
 					darkSquareColor={this.props.darkSquareColor}
 					onMovePiece={onMovePiece} />
-				<textarea cols="80" rows="4" readOnly={true} value={this.state.pgn}></textarea>
+				<TextArea cols="80" rows="4" readOnly={true} value={this.state.pgn}></TextArea>
 				<br />
-				<form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
+				<Form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
 					<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
-	            	<button type="submit">送信</button>
-	            </form>
+	            	<Button type="submit">submit</Button>
+	            </Form>
 			</div>
     );
   }
