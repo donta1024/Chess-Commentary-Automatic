@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Chessdiagram from 'react-chessdiagram';
-import { Button, Form, TextArea, Container, Grid, Header, Accordion, Icon } from 'semantic-ui-react';
+import { 
+	Button, 
+	Form, 
+	TextArea, 
+	Container, 
+	Grid, 
+	Header, 
+	Accordion, 
+	Icon,
+	Segment,
+	Dimmer,
+	Loader
+	} from 'semantic-ui-react';
 
 var chess = new Chess();
 
@@ -65,6 +77,7 @@ class Board extends React.Component{
 					</Grid>
 				</div>
 			</Container>
+
 		</div>
     );
   }
