@@ -5,16 +5,26 @@ Chess Commentary Automatic
 
 ## Usage
 
-Install
+Install (MongoDB)
+```
+sudo apt-get install mongodb
+sudo systemctl enable mongodb
+```
+
+Install (Chess Commentary Automatic)
 ```
 npm install
 npm run build
 npm start
 ```
-- http://127.0.0.1:3000/　にアクセスすればトップページに飛びます。
+
+- http://127.0.0.1:3000/
+
 
 ## Developing
-
+ - View部分にはEJS+Reactを利用(ReactだけにするとChess-diagramがサーバサイドで使えないため)
+ - CSSライブラリにはSemanticUIを利用
+ - DBとしてMongoDBを利用(解析済みFENをキャッシュする目的で使うことを検討中。)
 
 
 ### Tools
