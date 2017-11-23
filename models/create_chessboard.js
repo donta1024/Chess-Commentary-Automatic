@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Chessdiagram from 'react-chessdiagram';
-import { Button } from 'semantic-ui-react';
-import { Form } from 'semantic-ui-react';
-import { TextArea } from 'semantic-ui-react';
-
+import { Button, Form, TextArea, Container, Grid, Header } from 'semantic-ui-react';
 var chess = new Chess();
 
 const lightSquareColor = '#2492FF';
@@ -62,21 +59,31 @@ class Board extends React.Component{
 		}
 		
     return (
-			<div>
-				<Chessdiagram
-					flip={this.props.flip}
-					fen={this.state.fen}
-					squareSize={this.props.squareSize}
-				  lightSquareColor={this.props.lightSquareColor}
-					darkSquareColor={this.props.darkSquareColor}
-					onMovePiece={onMovePiece} />
-				<TextArea cols="80" rows="4" readOnly={true} value={this.state.pgn}></TextArea>
-				<br />
-				<Form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
-					<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
-	            	<Button type="submit">submit</Button>
-	            </Form>
-			</div>
+		<div>
+			<Container style={{ marginTop: '3em' }}>
+				<Header as='h1'>Welcome to Chess-Commentary-Automatic!</Header>
+				<p>By donta1024, ishihara1989, interimadd, & AyatsujiP</p>
+				<Grid columns={2} stackable>
+					<Grid.Column>
+						<Chessdiagram
+							flip={this.props.flip}
+							fen={this.state.fen}
+							squareSize={this.props.squareSize}
+							lightSquareColor={this.props.lightSquareColor}
+							darkSquareColor={this.props.darkSquareColor}
+						onMovePiece={onMovePiece} />
+					</Grid.Column>
+					<Grid.Column>
+						<Form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
+							<TextArea cols="80" rows="4" readOnly={true} value={this.state.pgn}></TextArea>
+							<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
+							<Button type="submit">submit</Button>
+						</Form>
+					</Grid.Column>
+				</Grid>
+
+			</Container>
+		</div>
     );
   }
 }
