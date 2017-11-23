@@ -11,23 +11,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
     <script src="js/out.js"></script>
     
-    <div class="FEN_input">
-		
-		<p><input type="button" name="FENsubmit" value="submit FEN" onClick="submitFEN();"></p>
-	<div> 
-		<form name="FENSubmitForm" action="fensubmit" method="POST">
-			<input type="hidden" name='FENtoAnalyze' value="">
-		</form>
   </body>
-  
-  <script>
-		function submitFEN(){
-	        var FENstring = document.getElementById("root").firstElementChild.lastElementChild.value;
-	        console.log(FENstring);
-			document.forms.FENSubmitForm.FENtoAnalyze.value = FENstring;
-			var f = document.forms["FENSubmitForm"];
-			f.method = "POST";
-			f.submit(); 
-		};
-　　</script>
+
 </html>
