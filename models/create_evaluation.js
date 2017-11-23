@@ -15,7 +15,9 @@ class Board extends React.Component{
     super();
     this.state = {
       fen: startPosition,
-			pgn: ""
+	  pgn: "",
+	  analyzeResult: analyzeResult,
+	  allowMoves:false
     };
   }
 	componentWillMount(){
@@ -26,33 +28,25 @@ class Board extends React.Component{
 	}
 
 	render() {
-		var self = this
+		var self = this;
 		function onMovePiece(piece, fromSquare, toSquare){
-			let message = fromSquare + ' -> ' + toSquare;
-			console.log(message);
-			let r = chess.move({ from: fromSquare, to: toSquare });
-			if(r){
-				console.log(self.props.chess.fen());
-				console.log(self.props.chess.pgn());
-				self.setState({
-					fen: self.props.chess.fen(),
-					pgn: self.props.chess.pgn()
-				});
-			} else{
-				console.log("invalid move!");
-			}
 		}
 		
     return (
 			<div>
+    	    	<h3> submit succeeded!</h3>
 				<Chessdiagram
+					allowMoves={this.state.allowMoves}
 					flip={this.props.flip}
 					fen={this.state.fen}
 					squareSize={this.props.squareSize}
 				  lightSquareColor={this.props.lightSquareColor}
 					darkSquareColor={this.props.darkSquareColor}
 					onMovePiece={onMovePiece} />
+				<p>FEN String: {this.state.fen}</p>
+				<p>Analyze Result: {this.state.analyzeResult}</p>
 			</div>
+
     );
   }
 }

@@ -19,7 +19,7 @@ exports.start = function(req,res){
 
 	    console.log("Res:");
 	    console.log(evaluator.analysis_result);
-	    analyzeResult = JSON.stringify(evaluator.analysis_result,null,'\t');
+	    analyzeResult = JSON.stringify(evaluator.analysis_result);
 
 	    res.render('fensubmit',{'FEN':analyze_string,"analyzeResult":analyzeResult});
 	});
