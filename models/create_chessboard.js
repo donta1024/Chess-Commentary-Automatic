@@ -94,7 +94,7 @@ class Board extends React.Component{
 							<Form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
 								<TextArea cols="80" rows="4" readOnly={true} value={this.state.pgn}></TextArea>
 								<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
-								<Button type="submit">submit</Button>
+								<Button type="submit">FEN submit</Button>
 							</Form>
 						</Grid.Column>
 					</Grid>

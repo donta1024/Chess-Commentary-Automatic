@@ -39,7 +39,19 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post('/fensubmit', fensubmit.start);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+
+
+function serverSet(app,callback){
+	var server = http.createServer(app);
+	server.timeout = 10 * 60 * 1000;
+	callback(app, server);
+}
+
+function serverStart(app,server){
+	server.listen(app.get('port'), function(){
+	  console.log('Express server listening on port ' + app.get('port'));
+	});
+}
+
+serverSet(app,serverStart);
 
