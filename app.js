@@ -5,6 +5,7 @@
 var express = require('express')
   , routes = require('./routes')
   , fensubmit = require('./routes/fensubmit')
+  , pgnsubmit = require('./routes/pgnsubmit')
   , http = require('http')
   , path = require('path');
 
@@ -38,7 +39,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/fensubmit', fensubmit.start);
-
+app.post('/pgnsubmit', pgnsubmit.start);
 
 
 function serverSet(app,callback){

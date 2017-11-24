@@ -96,6 +96,10 @@ class Board extends React.Component{
 								<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
 								<Button type="submit">FEN submit</Button>
 							</Form>
+							<Form name="PGNSubmitForm" action="pgnsubmit" method="POST" onSubmit={this.handleSubmit}>
+								<input name="PGNtoAnalyze" type="hidden" cols="80" rows="4" readOnly={true} value={this.state.pgn}></input>
+								<Button type="submit">PGN submit</Button>
+							</Form>
 						</Grid.Column>
 					</Grid>
 				</Container>

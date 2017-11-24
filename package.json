@@ -18,7 +18,8 @@
     "react-dom": "^15.6.2",
     "stockfish": "^8.0.0",
     "mongodb": "*",
-    "semantic-ui-react": "*"
+    "semantic-ui-react": "*",
+    "step":"*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

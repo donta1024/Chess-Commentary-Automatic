@@ -155,7 +155,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
             callback_func();
             return; 
         }
-        setTimeout(function(){ self.executeCallbackfuncAfterEvaluationFinish(callback_func); }, 500);
+        setTimeout(function(){ self.executeCallbackfuncAfterEvaluationFinish(callback_func); }, 5000);
     };
 
 }
@@ -178,12 +178,3 @@ function setEvaluation(match, resultJson, resultKey){
 	}
 	return resultJson;
 }
-
-/*
-//局面評価クラスの使用方法のイメージ　
-var position = "fen rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2";
-var evaluator = new EvaluateBoard(position,2);
-evaluator.executeCallbackfuncAfterEvaluationFinish( function(){
-    console.log(evaluator.analysis_result);
-});
-*/
