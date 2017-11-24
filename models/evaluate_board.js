@@ -74,7 +74,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
             this.postMessage(str);
         };
 
-        console.log(line);
+        //console.log(line);
         
         // チェスエンジンの準備ができた通知が来たときの処理
         if (line === "uciok") 
@@ -145,7 +145,14 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
         else if (line.indexOf("          Space") > -1){
         	match = line.match(/-?[0-9]+.[0-9]+/g);
         	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "space");}
-        }        
+        }
+        //最後にpvSanが現れたlineが、最善手のラインであるため、上書きしていく
+        else if (line.indexOf("info depth") > -1){
+        	match = line.match(/pvSan.*bmc/g);
+        	if (match){
+        		self.analysis_result["calculated_line"] = match[0].slice(6,-4);
+        	}
+        }
     };
 
     this.executeCallbackfuncAfterEvaluationFinish = function(callback_func){

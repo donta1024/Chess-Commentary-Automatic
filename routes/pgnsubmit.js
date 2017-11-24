@@ -13,7 +13,7 @@ const startPos = chessCurrent.fen();
 exports.start = function(req,res){
 	var body = req.body;
 	var analyzeResult = "";
-	var analyzeResults = "";
+	var analyzeResults = [];
 	var ct = 0;
 	var pgn = body.PGNtoAnalyze.replace('/\+/g',' ');
 
@@ -33,9 +33,9 @@ exports.start = function(req,res){
 			ct += 1;
 		    console.log("Res:");
 		    console.log(evaluator.analysis_result);
-		    analyzeResults += JSON.stringify(evaluator.analysis_result);
+		    analyzeResults.push(evaluator.analysis_result);
 		    if (ct == fens.length){
-		    	res.render("pgnsubmit",{"analyzeResult":analyzeResults});
+		    	res.render("pgnsubmit",{"analyzeResult":JSON.stringify(analyzeResults)});
 		    }
 		});
 		setTimeout(callback, 6000);
