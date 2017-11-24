@@ -10,7 +10,8 @@ import {
 	Header,
 	Segment,
 	Dimmer,
-	Loader
+	Loader,
+	Menu
 	} from 'semantic-ui-react';
 var chess = new Chess();
 
@@ -73,7 +74,11 @@ class Board extends React.Component{
 		
     return (
 		<div>
-			<Segment>
+			<Menu borderless attached='top' color='teal'>
+				<Menu.Item>Chess-Commentary-Automatic</Menu.Item>
+				<Menu.Item href="/">Top Page</Menu.Item>
+			</Menu>
+			<Segment attached='bottom'>
 				<Dimmer active={this.state.load} inverted>
 					<Loader content='Calculating. Please Wait...' />
 				</Dimmer>

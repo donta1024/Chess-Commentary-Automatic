@@ -19,6 +19,9 @@
     "stockfish": "^8.0.0",
     "mongodb": "*",
     "semantic-ui-react": "*",
+    "async":"*",
+    "chess.js":"*"
+    
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

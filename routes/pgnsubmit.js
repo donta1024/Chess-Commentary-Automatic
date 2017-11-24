@@ -4,7 +4,6 @@
 
 var evaluateBoard = require("../models/evaluate_board");
 var async = require('async');
-var Step = require('step');
 const Chessjs = require("chess.js").Chess;
 const chess = new Chessjs();
 const chessCurrent = new Chessjs();
