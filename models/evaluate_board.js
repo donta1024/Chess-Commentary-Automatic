@@ -54,12 +54,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
     		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     };
-    
-    /* deprecated */
-    /* 解析結果を格納するメンバー変数 */
-    this.best_move              = "";               // 最善手
-    this.calculated_line        = "";               // エンジンが読んだ筋
-    this.total_evaluation_score = 0;                // 現在の局面の評価値。単位はCP
+  
     
     /* チェスエンジンを起動する */
     this.is_finish_evaluation = false;
@@ -74,7 +69,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
             this.postMessage(str);
         };
 
-        console.log(line);
+        //console.log(line);
         
         // チェスエンジンの準備ができた通知が来たときの処理
         if (line === "uciok") 
@@ -145,7 +140,14 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
         else if (line.indexOf("          Space") > -1){
         	match = line.match(/-?[0-9]+.[0-9]+/g);
         	if (match) {self.analysis_result = setEvaluation(match, self.analysis_result, "space");}
-        }        
+        }
+        //最後にpvSanが現れたlineが、最善手のラインであるため、上書きしていく
+        else if (line.indexOf("info depth") > -1){
+        	match = line.match(/pvSan.*bmc/g);
+        	if (match){
+        		self.analysis_result["calculated_line"] = match[0].slice(6,-4);
+        	}
+        }
     };
 
     this.executeCallbackfuncAfterEvaluationFinish = function(callback_func){
@@ -155,7 +157,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
             callback_func();
             return; 
         }
-        setTimeout(function(){ self.executeCallbackfuncAfterEvaluationFinish(callback_func); }, 500);
+        setTimeout(function(){ self.executeCallbackfuncAfterEvaluationFinish(callback_func); }, 5000);
     };
 
 }
@@ -178,12 +180,3 @@ function setEvaluation(match, resultJson, resultKey){
 	}
 	return resultJson;
 }
-
-/*
-//局面評価クラスの使用方法のイメージ　
-var position = "fen rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2";
-var evaluator = new EvaluateBoard(position,2);
-evaluator.executeCallbackfuncAfterEvaluationFinish( function(){
-    console.log(evaluator.analysis_result);
-});
-*/

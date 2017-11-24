@@ -5,6 +5,7 @@
 var express = require('express')
   , routes = require('./routes')
   , fensubmit = require('./routes/fensubmit')
+  , pgnsubmit = require('./routes/pgnsubmit')
   , http = require('http')
   , path = require('path');
 
@@ -38,8 +39,20 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/fensubmit', fensubmit.start);
+app.post('/pgnsubmit', pgnsubmit.start);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+
+function serverSet(app,callback){
+	var server = http.createServer(app);
+	server.timeout = 10 * 60 * 1000;
+	callback(app, server);
+}
+
+function serverStart(app,server){
+	server.listen(app.get('port'), function(){
+	  console.log('Express server listening on port ' + app.get('port'));
+	});
+}
+
+serverSet(app,serverStart);
 

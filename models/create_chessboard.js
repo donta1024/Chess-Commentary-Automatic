@@ -10,7 +10,8 @@ import {
 	Header,
 	Segment,
 	Dimmer,
-	Loader
+	Loader,
+	Menu
 	} from 'semantic-ui-react';
 var chess = new Chess();
 
@@ -73,7 +74,11 @@ class Board extends React.Component{
 		
     return (
 		<div>
-			<Segment>
+			<Menu borderless attached='top' color='teal'>
+				<Menu.Item>Chess-Commentary-Automatic</Menu.Item>
+				<Menu.Item href="/">Top Page</Menu.Item>
+			</Menu>
+			<Segment attached='bottom'>
 				<Dimmer active={this.state.load} inverted>
 					<Loader content='Calculating. Please Wait...' />
 				</Dimmer>
@@ -94,7 +99,11 @@ class Board extends React.Component{
 							<Form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
 								<TextArea cols="80" rows="4" readOnly={true} value={this.state.pgn}></TextArea>
 								<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
-								<Button type="submit">submit</Button>
+								<Button type="submit">FEN submit</Button>
+							</Form>
+							<Form name="PGNSubmitForm" action="pgnsubmit" method="POST" onSubmit={this.handleSubmit}>
+								<input name="PGNtoAnalyze" type="hidden" cols="80" rows="4" readOnly={true} value={this.state.pgn}></input>
+								<Button type="submit">PGN submit</Button>
 							</Form>
 						</Grid.Column>
 					</Grid>

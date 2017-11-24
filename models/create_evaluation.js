@@ -12,7 +12,8 @@ import {
 	Icon,
 	Segment,
 	Dimmer,
-	Loader
+	Loader,
+	Menu
 	} from 'semantic-ui-react';
 
 var chess = new Chess();
@@ -56,7 +57,11 @@ class Board extends React.Component{
 		
     return (
 		<div>
-			<Container style={{ marginTop: '3em' }}>
+			<Menu borderless attached='top' color='teal'>
+				<Menu.Item>Chess-Commentary-Automatic</Menu.Item>
+				<Menu.Item href="/">Top Page</Menu.Item>
+			</Menu>
+			<Container style={{ marginTop: '3em' }} attached='bottom'>
 				<div>
 					<Header as='h1'> submit succeeded!</Header>
 					<Grid columns={2} stackable>

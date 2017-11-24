@@ -14,6 +14,18 @@ function insertDocuments(db, table, insertJson, callback) {
         });
 }
 
+function searchDocuments(db,table,fenPosition,callback){
+	var result = null;
+	collection = db.collection(table);
+	collection.findOne({"fen_position":fenPosition},(err,result)=>{
+		callback(result);		
+	});
+
+	return result;
+}
+
+
+
 var insertIntoMongoDB = function (table, insertJson){
 	MongoClient.connect(url, function(err, mongodb) {
 		  assert.equal(null, err);
@@ -26,4 +38,19 @@ var insertIntoMongoDB = function (table, insertJson){
 	});
 }
 
+var searchFromMongoDB = function(table,fenPosition){
+	var ret = null;
+	MongoClient.connect(url, function(err, mongodb) {
+		  assert.equal(null, err);
+		  console.log("Connected correctly to server");
+		  db = mongodb;
+		  
+		  ret = searchDocuments(db, table, fenPosition, function(result) {
+			  db.close();
+		  });
+	});
+	return ret;
+}
+
 exports.insertIntoMongoDB = insertIntoMongoDB;
+exports.searchFromMongoDB = searchFromMongoDB;
