@@ -1,6 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Chessdiagram from 'react-chessdiagram';
+import { 
+	Button, 
+	Form, 
+	TextArea, 
+	Container, 
+	Grid, 
+	Header, 
+	Accordion, 
+	Icon,
+	Segment,
+	Dimmer,
+	Loader
+	} from 'semantic-ui-react';
 
 var chess = new Chess();
 
@@ -12,47 +25,60 @@ const squareSize = 45;
 
 class Board extends React.Component{
 	constructor(){
-    super();
-    this.state = {
-      fen: startPosition,
-			pgn: ""
-    };
-  }
+	    super();
+	    this.state = {
+	      fen: startPosition,
+		  pgn: "",
+		  analyzeResult: analyzeResult,
+		  allowMoves:false,
+		  activeIndex: 0 
+	    };
+	}
 	componentWillMount(){
 		this.setState({
 			fen: startPosition,
 			pgn: ""
 		});
-	}
+	};
+
 
 	render() {
-		var self = this
-		function onMovePiece(piece, fromSquare, toSquare){
-			let message = fromSquare + ' -> ' + toSquare;
-			console.log(message);
-			let r = chess.move({ from: fromSquare, to: toSquare });
-			if(r){
-				console.log(self.props.chess.fen());
-				console.log(self.props.chess.pgn());
-				self.setState({
-					fen: self.props.chess.fen(),
-					pgn: self.props.chess.pgn()
-				});
-			} else{
-				console.log("invalid move!");
+		const panels = [
+			{
+				title: 'Show Details:',
+				content: 'Analyze Result:' +  this.state.analyzeResult
 			}
+		];
+	
+		var self = this;
+		function onMovePiece(piece, fromSquare, toSquare){
 		}
 		
     return (
-			<div>
-				<Chessdiagram
-					flip={this.props.flip}
-					fen={this.state.fen}
-					squareSize={this.props.squareSize}
-				  lightSquareColor={this.props.lightSquareColor}
-					darkSquareColor={this.props.darkSquareColor}
-					onMovePiece={onMovePiece} />
-			</div>
+		<div>
+			<Container style={{ marginTop: '3em' }}>
+				<div>
+					<Header as='h1'> submit succeeded!</Header>
+					<Grid columns={2} stackable>
+						<Grid.Column>
+							<Chessdiagram
+								allowMoves={this.state.allowMoves}
+								flip={this.props.flip}
+								fen={this.state.fen}
+								squareSize={this.props.squareSize}
+								lightSquareColor={this.props.lightSquareColor}
+								darkSquareColor={this.props.darkSquareColor}
+							onMovePiece={onMovePiece} />
+						</Grid.Column>
+						<Grid.Column>
+							<p>FEN String: {this.state.fen}</p>
+							<Accordion panels={panels} />
+						</Grid.Column>
+					</Grid>
+				</div>
+			</Container>
+
+		</div>
     );
   }
 }

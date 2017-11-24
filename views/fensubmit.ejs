@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
-	<link rel='stylesheet' href='/stylesheets/style.css' />
   <head>
     <title>FEN Submit</title>
-    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.11/semantic.min.css"></link>
+    <script>
+    	const currentFen='<%=FEN %>';
+    	const analyzeResult = '<%- analyzeResult %>';
+    </script>
   </head>
   <body>
-  <script>const currentFen='<%=FEN %>'</script>
-    <h3> submit succeeded!</h3>
 	<div id="root"></div>
-    <p>FEN String: <%=FEN %></p>
-    <p>Analyze Result: <%- analyzeResult %></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
     <script src="js/eval.js"></script>
   </body>

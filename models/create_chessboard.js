@@ -1,7 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Chessdiagram from 'react-chessdiagram';
-
+import { 
+	Button, 
+	Form, 
+	TextArea, 
+	Container, 
+	Grid, 
+	Header,
+	Segment,
+	Dimmer,
+	Loader
+	} from 'semantic-ui-react';
 var chess = new Chess();
 
 const lightSquareColor = '#2492FF';
@@ -17,8 +27,10 @@ class Board extends React.Component{
     super();
     this.state = {
       fen: startPosition,
-			pgn: ""
+	  pgn: "",
+	  load: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 	componentWillMount(){
 		this.setState({
@@ -39,6 +51,7 @@ class Board extends React.Component{
 	}
 	
 	handleSubmit() {
+		this.setState({load:true});
 	}
 	render() {
 		var self = this
@@ -59,21 +72,35 @@ class Board extends React.Component{
 		}
 		
     return (
-			<div>
-				<Chessdiagram
-					flip={this.props.flip}
-					fen={this.state.fen}
-					squareSize={this.props.squareSize}
-				  lightSquareColor={this.props.lightSquareColor}
-					darkSquareColor={this.props.darkSquareColor}
-					onMovePiece={onMovePiece} />
-				<textarea cols="80" rows="4" readOnly={true} value={this.state.pgn}></textarea>
-				<br />
-				<form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
-					<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
-	            	<button type="submit">送信</button>
-	            </form>
-			</div>
+		<div>
+			<Segment>
+				<Dimmer active={this.state.load} inverted>
+					<Loader content='Calculating. Please Wait...' />
+				</Dimmer>
+				<Container style={{ marginTop: '3em' }}>
+					<Header as='h1'>Welcome to Chess-Commentary-Automatic!</Header>
+					<p>By donta1024, ishihara1989, interimadd, & AyatsujiP</p>
+					<Grid columns={2} stackable>
+						<Grid.Column>
+							<Chessdiagram
+								flip={this.props.flip}
+								fen={this.state.fen}
+								squareSize={this.props.squareSize}
+								lightSquareColor={this.props.lightSquareColor}
+								darkSquareColor={this.props.darkSquareColor}
+							onMovePiece={onMovePiece} />
+						</Grid.Column>
+						<Grid.Column>
+							<Form name="FENSubmitForm" action="fensubmit" method="POST" onSubmit={this.handleSubmit}>
+								<TextArea cols="80" rows="4" readOnly={true} value={this.state.pgn}></TextArea>
+								<input name="FENtoAnalyze" type="text" size="80" maxLength="80" readOnly={true} value={this.state.fen}></input>
+								<Button type="submit">submit</Button>
+							</Form>
+						</Grid.Column>
+					</Grid>
+				</Container>
+			</Segment>
+		</div>
     );
   }
 }
