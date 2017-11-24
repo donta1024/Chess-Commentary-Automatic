@@ -54,12 +54,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
     		"white": {"MG": 0, "EG": 0}, "black": {"MG": 0, "EG": 0}, "total": {"MG": 0, "EG": 0}    		
     	},
     };
-    
-    /* deprecated */
-    /* 解析結果を格納するメンバー変数 */
-    this.best_move              = "";               // 最善手
-    this.calculated_line        = "";               // エンジンが読んだ筋
-    this.total_evaluation_score = 0;                // 現在の局面の評価値。単位はCP
+  
     
     /* チェスエンジンを起動する */
     this.is_finish_evaluation = false;

@@ -31,14 +31,14 @@ exports.start = function(req,res){
 		
 		evaluator.executeCallbackfuncAfterEvaluationFinish( function(){
 			ct += 1;
-		    console.log("Res:");
+		    console.log(ct + " Res:");
 		    console.log(evaluator.analysis_result);
 		    analyzeResults.push(evaluator.analysis_result);
 		    if (ct == fens.length){
 		    	res.render("pgnsubmit",{"analyzeResult":JSON.stringify(analyzeResults)});
 		    }
 		});
-		setTimeout(callback, 6000);
+		setTimeout(callback, 7 * 1000);
 	},
 	console.log("Finish Eval!"));
 }
