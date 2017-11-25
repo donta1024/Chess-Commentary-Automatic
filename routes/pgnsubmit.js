@@ -19,16 +19,16 @@ exports.start = function(req,res){
 	var pgn = body.PGNtoAnalyze.replace('/\+/g',' ');
 	console.log(pgn);
 	
-	pgnLoad(res,pgn,loading,loop,finish);
+	pgnLoad(res,pgn,loading,loop);
 
 }
 
-var pgnLoad = function(res,pgn,callback,callback2,callback3){
+var pgnLoad = function(res,pgn,callback,callback2){
 	chess.load(pgn);
-	callback(res,pgn,callback2,callback3);
+	callback(res,pgn,callback2);
 }
 
-var loading = function(res,pgn,callback,callback2){
+var loading = function(res,pgn,callback){
 	chess.load_pgn(pgn);
 	var fens = chess.history().map(move => {
 		  chessCurrent.move(move);
@@ -42,26 +42,23 @@ var loading = function(res,pgn,callback,callback2){
 var loop = function(res,fens,pgn){
 	
 	async.forEachSeries(fens,function(fen,callback){
-		evaluator = new evaluateBoard.EvaluateBoard(fen,2);
+		this.evaluator = new evaluateBoard.EvaluateBoard(fen,2);
 
-		evaluator.executeCallbackfuncAfterEvaluationFinish(
+		this.evaluator.executeCallbackfuncAfterEvaluationFinish(
 				function(){
 					this.ct += 1;
 				    console.log(ct + " Res:");
-				    console.log(evaluator.analysis_result);
-				    this.analyzeResults["result"].push(evaluator.analysis_result);
+				    console.log(this.evaluator.analysis_result);
+				    this.analyzeResults["result"].push(this.evaluator.analysis_result);
 				    if (this.ct == fens.length){
 				    	res.render("pgnsubmit",{"analyzeResult":JSON.stringify(this.analyzeResults),"pgn":pgn});
 				    }
-				    callback();
+				    callback(this.evaluator);
 				}
 		);
 	},
-	function(){
+	function(evaluator){
+		evaluator = null;
 		console.log("Callback");
 	});
-}
-
-var finish = function(){
-	setTimeout(() => console.log("Finish Evaluation loop"),10000);
 }
