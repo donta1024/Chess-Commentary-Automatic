@@ -53,12 +53,11 @@ var loop = function(res,fens,pgn){
 				    if (this.ct == fens.length){
 				    	res.render("pgnsubmit",{"analyzeResult":JSON.stringify(this.analyzeResults),"pgn":pgn});
 				    }
-				    callback(this.evaluator);
+				    callback();
 				}
 		);
 	},
-	function(evaluator){
-		evaluator = null;
+	function(){
 		console.log("Callback");
 	});
 }
