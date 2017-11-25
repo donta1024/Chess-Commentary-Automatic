@@ -25,7 +25,7 @@ npm start
  - View部分にはEJS+Reactを利用(ReactだけにするとChess-diagramがサーバサイドで使えないため)
  - CSSライブラリにはSemanticUIを利用
  - DBとしてMongoDBを利用(解析済みFENをキャッシュする目的で使うことを検討中。)
-
+ - PGN submitは非同期処理をうまく処理しきれていないため開発途中
 
 ### Tools
 

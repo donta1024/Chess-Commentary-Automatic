@@ -34,7 +34,7 @@ exports.start = function(req,res){
 		    console.log(evaluator.analysis_result);
 		    analyzeResults.push(evaluator.analysis_result);
 		    if (ct == fens.length){
-		    	res.render("pgnsubmit",{"analyzeResult":JSON.stringify(analyzeResults)});
+		    	res.render("pgnsubmit",{"analyzeResult":JSON.stringify(analyzeResults),"pgn":pgn});
 		    }
 		});
 		setTimeout(callback, 7 * 1000);

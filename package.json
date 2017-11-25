@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;babel ./models/create_evaluation.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/eval.js && rm -f tmp.js;",
+    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;babel ./models/create_evaluation.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/eval.js && rm -f tmp.js;babel ./models/create_evaluation_pgn.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/eval_pgn.js && rm -f tmp.js;",
     "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js"
   },
   "dependencies": {
