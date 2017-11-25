@@ -153,6 +153,7 @@ var EvaluateBoard = function(FEN_format_position,evaluation_time_length)
     this.executeCallbackfuncAfterEvaluationFinish = function(callback_func){
         if( this.is_finish_evaluation == true )
         {
+        	this.engine = null;
         	saveToMongoDB.insertIntoMongoDB(tableName,self.analysis_result);
             callback_func();
             return; 
