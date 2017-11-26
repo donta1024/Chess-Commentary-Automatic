@@ -23,6 +23,7 @@ const darkSquareColor = '#005EBB';
 const startPosition =  currentFen; // starting position
 const flip = false;
 const squareSize = 45;
+const pgn = PGNtoAnalyze;
 
 class Board extends React.Component{
 	constructor(){
@@ -38,7 +39,7 @@ class Board extends React.Component{
 	componentWillMount(){
 		this.setState({
 			fen: startPosition,
-			pgn: ""
+			pgn: PGNtoAnalyze
 		});
 	};
 
@@ -74,6 +75,9 @@ class Board extends React.Component{
 								lightSquareColor={this.props.lightSquareColor}
 								darkSquareColor={this.props.darkSquareColor}
 							onMovePiece={onMovePiece} />
+							<Form>
+								<TextArea readOnly={true} value={this.state.pgn}></TextArea>
+							</Form>
 						</Grid.Column>
 						<Grid.Column>
 							<p>FEN String: {this.state.fen}</p>

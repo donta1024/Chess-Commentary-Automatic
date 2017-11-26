@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;babel ./models/create_evaluation.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/eval.js && rm -f tmp.js;",
+    "build": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js && rm -f tmp.js;babel ./models/create_evaluation.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/eval.js && rm -f tmp.js;babel ./models/create_evaluation_pgn.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/eval_pgn.js && rm -f tmp.js;",
     "debug": "babel ./models/create_chessboard.js --presets=env,react --plugins=transform-react-jsx > tmp.js && browserify ./tmp.js -t babelify  --outfile ./public/js/out.js"
   },
   "dependencies": {
@@ -17,8 +17,10 @@
     "react-chessdiagram": "^1.3.3",
     "react-dom": "^15.6.2",
     "stockfish": "^8.0.0",
-    "mongodb":"*",
-    "semantic-ui-react":"*"
+    "mongodb": "*",
+    "semantic-ui-react": "*",
+    "async":"*",
+    "chess.js":"*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
